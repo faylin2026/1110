@@ -1,4 +1,4 @@
-// 肉品訂購登記：前端程式
+// 訂購登記表：前端程式
 // 只使用 publishable key 連線；資料庫只允許新增訂單，不能讀取（見 supabase/orders.sql）。
 (function () {
   "use strict";
@@ -48,6 +48,7 @@
         origin: i.origin,
         store: storeName(i.store),
         perKg: Math.round((hi / i.weightKg) * 100) / 100,
+        pack: i.unit === "包" || i.unit === "盒" ? { price: hi, kg: i.weightKg, unit: i.unit } : null,
         isRange: Array.isArray(i.price),
       };
     });
@@ -75,7 +76,8 @@
     if (o) {
       itemInfo.textContent =
         "店家：" + o.store + "・來源：" + o.origin + "・每公斤 " + money.format(o.perKg) + " 元" +
-        (o.isRange ? "（店家標價不一致，以較高價估算）" : "");
+        (o.isRange ? "（店家標價不一致，以較高價估算）" : "") +
+        (o.pack ? "・每" + o.pack.unit + " " + o.pack.kg + " 公斤、" + money.format(o.pack.price) + " 元" : "");
     } else {
       itemInfo.textContent = "";
     }
