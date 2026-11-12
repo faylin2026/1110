@@ -271,3 +271,7 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 .stepper .qty { width: 56px; text-align: center; padding: 8px 4px; }
 .summary { border-top: 2px solid var(--border); padding-top: 10px; }
 .summary p { margin: 0 0 4px; }
+
+/* ---------- 錦記地瓜酥訂購登記 ---------- */
+.stepper-wide .step-btn { width: 52px; }
+.stepper-wide input { width: 100px; text-align: center; }
