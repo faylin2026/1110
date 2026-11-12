@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>肉品訂購登記</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="top-nav"><a href="index.html">← 台中牛羊肉價格比較</a></nav>
+    <h1>肉品訂購登記</h1>
+    <p class="subtitle">選擇品項與重量，填寫聯絡資料後送出。送出後會由專人向店家下單並與你聯絡。</p>
+  </header>
+
+  <main>
+    <div id="config-warning" class="message message-error" role="alert" hidden></div>
+
+    <div class="message message-warn" role="note">
+      <strong>請注意：</strong>
+      金額是用網路參考價估算的，實際價格以店家報價為準。送出後訂單不會自動傳給店家。你的姓名與電話不會顯示在網頁上。
+    </div>
+
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">訂購內容</h2>
+      <form id="order-form" novalidate>
+        <div class="field">
+          <label for="item">品項 <span class="req" aria-hidden="true">*</span></label>
+          <select id="item" name="item" required>
+            <option value="" selected disabled>請選擇品項</option>
+          </select>
+          <p id="item-info" class="hint"></p>
+        </div>
+
+        <div class="field">
+          <label for="weight_kg">重量（公斤） <span class="req" aria-hidden="true">*</span></label>
+          <input id="weight_kg" name="weight_kg" type="number" inputmode="decimal" min="0.1" max="50" step="0.1" value="1" required>
+          <p class="hint">0.1～50 公斤。1 台斤 = 0.6 公斤，半台斤 = 0.3 公斤。</p>
+        </div>
+
+        <p class="estimate">預估金額：<strong id="estimate">—</strong></p>
+
+        <h2 class="form-section">聯絡資料</h2>
+
+        <div class="field">
+          <label for="customer_name">訂購人 <span class="req" aria-hidden="true">*</span></label>
+          <input id="customer_name" name="customer_name" type="text" maxlength="50" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label for="phone">電話 <span class="req" aria-hidden="true">*</span></label>
+          <input id="phone" name="phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" placeholder="例如 0912-345-678" required>
+        </div>
+
+        <fieldset class="field radio-group">
+          <legend>取貨方式 <span class="req" aria-hidden="true">*</span></legend>
+          <label class="radio"><input type="radio" name="pickup_method" value="自取" checked> 到店自取</label>
+          <label class="radio"><input type="radio" name="pickup_method" value="宅配"> 宅配</label>
+        </fieldset>
+
+        <div class="field">
+          <label id="pickup-note-label" for="pickup_note">希望取貨時間</label>
+          <input id="pickup_note" name="pickup_note" type="text" maxlength="200">
+          <p id="pickup-note-hint" class="hint">選填，例如：11/20 下午。</p>
+        </div>
+
+        <div class="field">
+          <label for="note">備註</label>
+          <textarea id="note" name="note" rows="3" maxlength="500" placeholder="例如：切成火鍋片、分成 3 包"></textarea>
+        </div>
+
+        <button id="submit-btn" type="submit">送出訂購</button>
+        <div id="form-message" class="message" role="status" aria-live="polite" hidden></div>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"
+          integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK"
+          crossorigin="anonymous"></script>
+  <script src="config.js"></script>
+  <script src="meat-data.js"></script>
+  <script src="order.js"></script>
+</body>
+</html>
