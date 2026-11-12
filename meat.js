@@ -120,7 +120,7 @@
       add("販售", s.meats.join("、"));
       add("地址", s.address);
       add("電話", telLink(s.phone));
-      add("肉品來源", s.source);
+      add("來源", s.source);
       add("Google 評分", s.rating || "待確認");
       add("店家資料", s.info);
       const hasPrice = data.items.some((i) => i.store === s.id || (s.id.startsWith("roubo") && i.store === "roubo"));

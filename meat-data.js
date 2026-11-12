@@ -1,4 +1,4 @@
-// 台中市牛肉、羊肉銷售據點與品項價格資料
+// 牛肉、羊肉、地瓜酥的銷售據點與品項價格資料
 // 資料整理自 文件/ 資料夾的牛肉、羊肉、牛肋條清單（2026-11-12），價格為網路參考價，非即時報價。
 // 每公斤價格由 beef.js 依「售價 ÷ 重量（公斤）」計算，這裡只放原始數字。
 window.MEAT_DATA = {
@@ -106,8 +106,18 @@ window.MEAT_DATA = {
       info: "販售新鮮牛肉、羊肉、火鍋片、牛排，提供全省低溫宅配",
       rating: null,
     },
+    {
+      id: "jinji",
+      meats: ["地瓜酥"],
+      name: "錦記手工地瓜酥（錦純手工地瓜酥）",
+      address: "高雄市旗津區中洲里永興巷93之1號（旗津中洲漁港旁，不在台中）",
+      phone: "07-571-5958",
+      source: "店家自行削皮、油炸的手工地瓜酥、芋頭酥",
+      info: "另有手機 0935-699-990。營業時間有 8:00–20:45 與 10:00–20:00 兩種說法，請先電話確認。店面每包約 100 元；網路代購、團購價約 105～140 元",
+      rating: null,
+    },
   ],
-  // meat：肉類；price：售價（元），可為 [最低, 最高]；weightKg：重量（公斤），null 表示未標示
+  // meat：類別（牛肉、羊肉、地瓜酥）；price：售價（元），可為 [最低, 最高]；weightKg：重量（公斤），null 表示未標示
   items: [
     { meat: "牛肉", store: "yidin", name: "美國安格斯肋眼牛排 2cm", origin: "美國", price: 160, unit: "每 100 公克", weightKg: 0.1, ref: "官網" },
     { meat: "牛肉", store: "yidin", name: "美國頂級肋眼牛排 Prime 2cm", origin: "美國", price: 240, unit: "每 100 公克", weightKg: 0.1, ref: "官網" },
@@ -138,6 +148,11 @@ window.MEAT_DATA = {
     { meat: "羊肉", store: "yidin", name: "紐西蘭法式小羔羊排（分切）", origin: "紐西蘭", price: [160, 180], unit: "每 100 公克", weightKg: 0.1, ref: "官網（兩個列表頁分別標 160、180）" },
     { meat: "羊肉", store: "yidin", name: "紐西蘭法式小羔羊肩排（分切）", origin: "紐西蘭", price: 90, unit: "每 100 公克", weightKg: 0.1, ref: "官網" },
     { meat: "羊肉", store: "yidin", name: "紐西蘭小羔羊肩包", origin: "紐西蘭", price: 80, unit: "每 100 公克", weightKg: 0.1, ref: "官網" },
+    { meat: "地瓜酥", store: "jinji", name: "地瓜酥（每包 400 公克）", origin: "高雄旗津手工", price: 100, unit: "包", weightKg: 0.4, ref: "訂便當系統店家頁（日期不明）" },
+    { meat: "地瓜酥", store: "jinji", name: "蜜糖地瓜酥（每包 350 公克）", origin: "高雄旗津手工", price: 100, unit: "包", weightKg: 0.35, ref: "部落格價目表（2023 年 7 月）" },
+    { meat: "地瓜酥", store: "jinji", name: "綜合酥（每包 300 公克）", origin: "高雄旗津手工", price: 100, unit: "包", weightKg: 0.3, ref: "重量：團購頁；售價：部落格（店面每包 100 元）" },
+    { meat: "地瓜酥", store: "jinji", name: "純芋頭酥（每包 250 公克）", origin: "高雄旗津手工", price: 100, unit: "包", weightKg: 0.25, ref: "重量：團購頁；售價：部落格（店面每包 100 元）" },
+    { meat: "地瓜酥", store: "jinji", name: "地瓜酥團購價（每包 350 公克）", origin: "高雄旗津手工", price: 140, unit: "包", weightKg: 0.35, ref: "914 團購頁（團購價）" },
   ],
 };
 
