@@ -251,3 +251,23 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
   font-weight: 600;
   text-decoration: none;
 }
+
+/* ---------- 地瓜酥登記表 ---------- */
+.snack-list { list-style: none; margin: 0 0 12px; padding: 0; }
+.snack-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+}
+.snack-item:first-child { border-top: none; }
+.snack-info { display: flex; flex-direction: column; min-width: 0; }
+.snack-name { margin: 0; overflow-wrap: anywhere; }
+.snack-info .hint { margin: 0; }
+.stepper { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.step-btn { width: 44px; padding: 0; font-size: 1.2rem; }
+.stepper .qty { width: 56px; text-align: center; padding: 8px 4px; }
+.summary { border-top: 2px solid var(--border); padding-top: 10px; }
+.summary p { margin: 0 0 4px; }
