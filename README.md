@@ -8,7 +8,7 @@
 
 純 HTML/CSS/JavaScript，不需要安裝或建置，共用 `style.css`：
 
-- `index.html`（首頁）：台中牛肉價格比較，資料在 `beef-data.js`，程式在 `beef.js`，不需要 Supabase。
+- `index.html`（首頁）：台中牛羊肉價格比較，資料在 `meat-data.js`，程式在 `meat.js`，不需要 Supabase。
 - `repair.html`：報修登記，程式在 `app.js`，連線設定在 `config.js`。
 
 報修登記的設定步驟：

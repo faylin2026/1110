@@ -1,12 +1,13 @@
-// 台中牛肉價格比較：依 beef-data.js 產生品項清單與店家資料
+// 台中牛羊肉價格比較：依 meat-data.js 產生品項清單與店家資料
 (function () {
   "use strict";
 
-  const data = window.BEEF_DATA;
+  const data = window.MEAT_DATA;
   const $ = (id) => document.getElementById(id);
   const itemList = $("item-list");
   const storeList = $("store-list");
   const status = $("items-status");
+  const filterMeat = $("filter-meat");
   const filterStore = $("filter-store");
   const filterOrigin = $("filter-origin");
   const sortSel = $("sort");
@@ -55,7 +56,8 @@
   // ---------- 品項 ----------
   function renderItems() {
     let rows = data.items.filter(
-      (i) => (!filterStore.value || i.store === filterStore.value) &&
+      (i) => (!filterMeat.value || i.meat === filterMeat.value) &&
+             (!filterStore.value || i.store === filterStore.value) &&
              (!filterOrigin.value || i.origin === filterOrigin.value)
     );
     const key = (i) => (perKg(i) ? perKg(i)[0] : Infinity); // 無法換算的排最後
@@ -76,6 +78,7 @@
       head.append(big);
 
       const tags = el("div", "item-top");
+      tags.append(el("span", "badge", i.meat));
       tags.append(el("span", "badge", i.origin));
       tags.append(el("span", "badge", storeName(i.store)));
 
@@ -93,7 +96,9 @@
 
   // ---------- 店家 ----------
   function renderStores() {
-    for (const s of data.stores) {
+    storeList.replaceChildren();
+    const stores = data.stores.filter((s) => !filterMeat.value || s.meats.includes(filterMeat.value));
+    for (const s of stores) {
       const li = el("li", "store-item");
       li.append(el("h3", "", s.name));
       const dl = el("dl", "store-dl");
@@ -103,6 +108,7 @@
         if (v instanceof Node) dd.append(v); else dd.textContent = v;
         dl.append(dd);
       };
+      add("販售", s.meats.join("、"));
       add("地址", s.address);
       add("電話", telLink(s.phone));
       add("肉品來源", s.source);
@@ -116,6 +122,7 @@
   }
 
   [filterStore, filterOrigin, sortSel].forEach((s) => s.addEventListener("change", renderItems));
+  filterMeat.addEventListener("change", () => { renderItems(); renderStores(); });
   renderItems();
   renderStores();
 })();
