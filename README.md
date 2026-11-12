@@ -9,6 +9,7 @@
 純 HTML/CSS/JavaScript，不需要安裝或建置，共用 `style.css`：
 
 - `index.html`（首頁）：訂購價格比較（台中牛肉、羊肉與高雄錦記地瓜酥），資料在 `meat-data.js`，程式在 `meat.js`，不需要 Supabase。
+- `snack.html`：錦記地瓜酥登記表，以「包」為單位登記各口味，程式在 `snack.js`；每個口味存成 `orders` 資料表的一筆（重量 = 包數 × 每包重量），不需要另外建表。
 - `order.html`：訂購登記表，品項來自 `meat-data.js`，程式在 `order.js`，連線設定在 `config.js`。訂單存到 Supabase 的 `orders` 資料表；網頁只能新增、不能讀取，請到 Supabase 後台 Table Editor 查看訂單。
 
 `supabase/schema.sql` 是先前報修登記用的 `repair_requests` 資料表，網頁已不再使用。

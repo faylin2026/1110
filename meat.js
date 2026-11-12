@@ -96,7 +96,9 @@
       li.append(head, tags, meta, call);
       if (pk) {
         const order = el("a", "order-link", "訂購這個品項");
-        order.href = "order.html?item=" + encodeURIComponent(window.MEAT_ITEM_ID(i));
+        // 錦記地瓜酥以「包」登記，連到專用的地瓜酥登記表
+        order.href = i.store === "jinji" ? "snack.html" : "order.html?item=" + encodeURIComponent(window.MEAT_ITEM_ID(i));
+        if (i.store === "jinji") order.textContent = "到地瓜酥登記表";
         li.append(order);
       }
       itemList.append(li);
