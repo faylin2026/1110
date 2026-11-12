@@ -1,0 +1,180 @@
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --text: #1f2933;
+  --muted: #5f6b7a;
+  --border: #d3d9e1;
+  --primary: #2357c6;
+  --primary-text: #ffffff;
+  --ok-bg: #e5f5ea;
+  --ok-text: #17612f;
+  --err-bg: #fdeaea;
+  --err-text: #a1201c;
+  --badge-bg: #eef1f5;
+  --high: #b42318;
+  --mid: #b54708;
+  --low: #3b6e3b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14181d;
+    --card: #1e242b;
+    --text: #e6e9ed;
+    --muted: #9aa5b1;
+    --border: #36404b;
+    --primary: #5b8def;
+    --primary-text: #0d1117;
+    --ok-bg: #173323;
+    --ok-text: #8fd6a6;
+    --err-bg: #3a1a1a;
+    --err-text: #f4a3a0;
+    --badge-bg: #2a323b;
+    --high: #f4877f;
+    --mid: #f5b26b;
+    --low: #8fcf8f;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.site-header, main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.site-header { padding-top: 24px; }
+.site-header h1 { margin: 0; font-size: 1.6rem; }
+.subtitle { margin: 4px 0 16px; color: var(--muted); }
+
+main { padding-bottom: 40px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.card h2 { margin: 0 0 12px; font-size: 1.2rem; }
+
+.field { margin-bottom: 14px; flex: 1; min-width: 0; }
+.field-row { display: flex; gap: 12px; }
+
+label { display: block; font-weight: 600; margin-bottom: 4px; }
+.req { color: var(--err-text); }
+
+/* 16px 以上字級可避免 iPhone 點輸入框時自動放大畫面 */
+input, select, textarea, button {
+  font: inherit;
+  font-size: 16px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+}
+
+textarea { resize: vertical; }
+
+input:focus, select:focus, textarea:focus, button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.hint { margin: 4px 0 0; color: var(--muted); font-size: 0.875rem; }
+
+button {
+  min-height: 44px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--primary-text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#submit-btn { width: 100%; }
+
+button.secondary {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+}
+
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.message {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+.message-ok { background: var(--ok-bg); color: var(--ok-text); }
+.message-error { background: var(--err-bg); color: var(--err-text); margin-bottom: 16px; }
+
+.list-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.list-head h2 { margin: 0; }
+
+.repair-list { list-style: none; margin: 8px 0 0; padding: 0; }
+
+.repair-item {
+  border-top: 1px solid var(--border);
+  padding: 12px 0;
+}
+.repair-item:first-child { border-top: none; }
+
+.item-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--badge-bg);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.urgency-高 { color: var(--high); font-weight: 700; }
+.urgency-中 { color: var(--mid); }
+.urgency-低 { color: var(--low); }
+
+.item-desc {
+  margin: 0 0 4px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.item-meta { margin: 0; color: var(--muted); font-size: 0.85rem; overflow-wrap: anywhere; }
+
+@media (max-width: 420px) {
+  .field-row { flex-direction: column; gap: 0; }
+}
