@@ -178,3 +178,54 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 @media (max-width: 420px) {
   .field-row { flex-direction: column; gap: 0; }
 }
+
+/* ---------- 頁面導覽 ---------- */
+.top-nav { margin-bottom: 8px; font-size: 0.9rem; }
+.top-nav a, .footer-note a, .store-dl a, .item-meta a { color: var(--primary); }
+
+/* ---------- 牛肉價格比較頁 ---------- */
+.message-warn {
+  background: var(--badge-bg);
+  color: var(--text);
+  border-left: 4px solid var(--mid);
+  margin: 0 0 16px;
+}
+.hint-inline { display: block; margin-top: 4px; color: var(--muted); font-size: 0.875rem; }
+
+.filters { flex-wrap: wrap; }
+.filters .field { min-width: 140px; }
+
+.item-list, .store-list { list-style: none; margin: 8px 0 0; padding: 0; }
+
+.price-item, .store-item { border-top: 1px solid var(--border); padding: 12px 0; }
+.price-item:first-child, .store-item:first-child { border-top: none; }
+
+.price-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.price-name { font-weight: 600; overflow-wrap: anywhere; }
+.price-kg { white-space: nowrap; color: var(--primary); }
+.price-kg strong { font-size: 1.15rem; }
+.price-kg .per { font-size: 0.8rem; color: var(--muted); }
+
+.store-item h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.store-dl {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: 4px 8px;
+  margin: 0;
+}
+.store-dl dt { color: var(--muted); }
+.store-dl dd { margin: 0; overflow-wrap: anywhere; }
+
+.footer-note { text-align: center; }
+
+@media (max-width: 420px) {
+  .price-head { flex-direction: column; gap: 2px; }
+  .store-dl { grid-template-columns: 1fr; }
+  .store-dl dt { margin-top: 4px; }
+}
