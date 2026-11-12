@@ -3,6 +3,8 @@
 // 每公斤價格由 beef.js 依「售價 ÷ 重量（公斤）」計算，這裡只放原始數字。
 window.MEAT_DATA = {
   updated: "2026-11-12",
+  // 價格未區分門市的連鎖店名稱
+  chainNames: { roubo: "肉搏站（價格未區分南屯／北屯門市）" },
   stores: [
     {
       id: "roubo-nantun",
@@ -138,3 +140,6 @@ window.MEAT_DATA = {
     { meat: "羊肉", store: "yidin", name: "紐西蘭小羔羊肩包", origin: "紐西蘭", price: 80, unit: "每 100 公克", weightKg: 0.1, ref: "官網" },
   ],
 };
+
+// 品項代碼：首頁「訂購」按鈕與訂購頁用它對應同一個品項
+window.MEAT_ITEM_ID = (item) => item.store + "|" + item.name;

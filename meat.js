@@ -16,7 +16,7 @@
   $("updated").textContent = data.updated;
 
   // 品項的店家代碼若不是單一門市（例如價格未區分門市的連鎖店），用這裡的名稱
-  const CHAIN_NAMES = { roubo: "肉搏站（價格未區分南屯／北屯門市）" };
+  const CHAIN_NAMES = data.chainNames || {};
   const CHAIN_PHONES = { roubo: "04-2380-3061" };
   const storeById = Object.fromEntries(data.stores.map((s) => [s.id, s]));
   const storeName = (id) => (storeById[id] ? storeById[id].name : CHAIN_NAMES[id] || id);
@@ -94,6 +94,11 @@
       call.append("訂購電話：", telLink(storePhone(i.store)));
 
       li.append(head, tags, meta, call);
+      if (pk) {
+        const order = el("a", "order-link", "訂購這個品項");
+        order.href = "order.html?item=" + encodeURIComponent(window.MEAT_ITEM_ID(i));
+        li.append(order);
+      }
       itemList.append(li);
     }
   }
