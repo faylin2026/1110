@@ -21,3 +21,12 @@
 2. 在 `config.js` 填入 Supabase 專案網址與 publishable key（不可放 secret key）。
 3. 本機預覽：在儲存庫根目錄執行 `python3 -m http.server 8000`，再開啟 http://localhost:8000/ （訂購頁是 http://localhost:8000/order.html ）。
 4. 發佈：GitHub 儲存庫 Settings → Pages → Source 選 Deploy from a branch，分支 `main`、資料夾 `/ (root)`。
+
+## PWA（可安裝成手機 App）
+
+- `manifest.webmanifest`：App 名稱、圖示、啟動頁（`index.html`）與捷徑（地瓜酥訂購、訂購登記表）。
+- `sw.js`：Service Worker。本站檔案先連網取得最新版本，離線時改用快取；Supabase API 不經過快取，所以訂單一定要連網才能送出。修改 `sw.js` 裡的預先快取清單時，請把 `CACHE_VERSION` 加 1。
+- `pwa.js`：在每個頁面註冊 Service Worker，離線時在頁面上方顯示提示。
+- `icons/`：App 圖示（192、512、maskable 512、Apple 180、favicon 32）。
+
+安裝方式：用手機開啟 GitHub Pages 網址後，Android Chrome 點「安裝應用程式」或「加到主畫面」；iPhone Safari 點分享 →「加入主畫面」。Service Worker 需要 HTTPS，本機預覽請用 `http://localhost`。
