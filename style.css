@@ -229,3 +229,6 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
   .store-dl { grid-template-columns: 1fr; }
   .store-dl dt { margin-top: 4px; }
 }
+
+.quick-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.chip { min-height: 36px; padding: 4px 12px; border-radius: 999px; font-size: 0.9rem; }

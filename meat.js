@@ -7,6 +7,7 @@
   const itemList = $("item-list");
   const storeList = $("store-list");
   const status = $("items-status");
+  const filterKeyword = $("filter-keyword");
   const filterMeat = $("filter-meat");
   const filterStore = $("filter-store");
   const filterOrigin = $("filter-origin");
@@ -53,10 +54,13 @@
   for (const id of itemStores) filterStore.append(new Option(storeName(id), id));
   for (const o of [...new Set(data.items.map((i) => i.origin))]) filterOrigin.append(new Option(o, o));
 
+  const keyword = () => filterKeyword.value.trim();
+
   // ---------- 品項 ----------
   function renderItems() {
     let rows = data.items.filter(
-      (i) => (!filterMeat.value || i.meat === filterMeat.value) &&
+      (i) => (!keyword() || i.name.includes(keyword())) &&
+             (!filterMeat.value || i.meat === filterMeat.value) &&
              (!filterStore.value || i.store === filterStore.value) &&
              (!filterOrigin.value || i.origin === filterOrigin.value)
     );
@@ -66,7 +70,7 @@
     if (sortSel.value === "store") rows.sort((a, b) => storeName(a.store).localeCompare(storeName(b.store), "zh-Hant") || key(a) - key(b));
 
     itemList.replaceChildren();
-    status.textContent = "共 " + rows.length + " 個品項";
+    status.textContent = rows.length ? "共 " + rows.length + " 個品項" : "沒有符合條件的品項";
     for (const i of rows) {
       const li = el("li", "price-item");
       const pk = perKg(i);
@@ -123,6 +127,10 @@
 
   [filterStore, filterOrigin, sortSel].forEach((s) => s.addEventListener("change", renderItems));
   filterMeat.addEventListener("change", () => { renderItems(); renderStores(); });
+  filterKeyword.addEventListener("input", renderItems);
+  document.querySelectorAll("[data-keyword]").forEach((b) =>
+    b.addEventListener("click", () => { filterKeyword.value = b.dataset.keyword; renderItems(); })
+  );
   renderItems();
   renderStores();
 })();

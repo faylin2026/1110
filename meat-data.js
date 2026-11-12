@@ -1,5 +1,5 @@
 // 台中市牛肉、羊肉銷售據點與品項價格資料
-// 資料整理自 文件/台中市牛肉銷售據點.md、文件/台中市羊肉銷售據點.md（2026-11-12），價格為網路參考價，非即時報價。
+// 資料整理自 文件/ 資料夾的牛肉、羊肉、牛肋條清單（2026-11-12），價格為網路參考價，非即時報價。
 // 每公斤價格由 beef.js 依「售價 ÷ 重量（公斤）」計算，這裡只放原始數字。
 window.MEAT_DATA = {
   updated: "2026-11-12",
@@ -23,16 +23,6 @@ window.MEAT_DATA = {
       source: "同南屯店（待確認）",
       info: "肉搏站分店，附設停車場；分切費：牛排 80 元／公斤、燒烤片 120 元／公斤（以現場看板為準）",
       rating: null,
-    },
-    {
-      id: "wagyu",
-      meats: ["牛肉"],
-      name: "瓦牛肉舖",
-      address: "台中市西區五權七街51巷1號",
-      phone: "04-2378-5458",
-      source: "日本 A5 和牛（鹿兒島、熊本、岡山、大分等，依批次）",
-      info: "1 樓和牛肉品專賣、可自取或外送；2 樓燒肉餐廳。有網站標示「已歇業」，請先確認",
-      rating: "4.7（2023 年部落格引用，待確認）",
     },
     {
       id: "matai",
@@ -75,6 +65,26 @@ window.MEAT_DATA = {
       rating: null,
     },
     {
+      id: "risheng",
+      meats: ["牛肉"],
+      name: "日盛牛肉",
+      address: "台中市北區雙十路二段23號（台安醫院旁）",
+      phone: "04-2221-6569",
+      source: "進口牛肉（美國等）",
+      info: "牛肉批發、網購與門市；營業時間官網寫 10:00–20:00，另一頁寫 9:00–19:00，請先電話確認",
+      rating: null,
+    },
+    {
+      id: "dasheng",
+      meats: ["牛肉"],
+      name: "大聖肉品",
+      address: "台中市南屯區南屯路二段593號（南屯市場 007、008 攤位）",
+      phone: "0922-212-291",
+      source: "進口牛肉（美國 1855 安格斯等）",
+      info: "肉品批發，也接受一般訂購；需先私訊或加 LINE 官方帳號 @ejk3077h 告知品項數量並約取貨時間。取貨：07:00–12:00 南屯市場，15:00–19:00 7-11 中勇門市",
+      rating: null,
+    },
+    {
       id: "quanyang",
       meats: ["羊肉"],
       name: "全羊商行",
@@ -112,6 +122,9 @@ window.MEAT_DATA = {
     { meat: "牛肉", store: "roubo", name: "美國特選板腱牛排（兩塊裝）", origin: "美國", price: 207, unit: "盒", weightKg: 0.4, ref: "部落格開箱文（重量約略值）" },
     { meat: "牛肉", store: "roubo", name: "美國安格斯無骨牛小排燒烤／火鍋片", origin: "美國", price: 571, unit: "盒", weightKg: 0.394, ref: "部落格開箱文" },
     { meat: "牛肉", store: "roubo", name: "紐西蘭沙朗牛排", origin: "紐西蘭", price: 156, unit: "包", weightKg: null, ref: "部落格開箱文（未標重量）" },
+    { meat: "牛肉", store: "dasheng", name: "冷藏 1855 安格斯牛肋條", origin: "美國", price: 750, unit: "包（1,000 公克）", weightKg: 1.0, ref: "店家官網" },
+    { meat: "牛肉", store: "risheng", name: "美國牛肋條（每包約 0.9～1.2 公斤，依實重計價）", origin: "美國", price: 900, unit: "每公斤", weightKg: 1.0, ref: "店家官網" },
+    { meat: "牛肉", store: "roubo", name: "美國特選牛正肋條（小包裝）", origin: "美國", price: 137, unit: "包", weightKg: null, ref: "部落格開箱文（未標重量）" },
     { meat: "羊肉", store: "quanyang", name: "帶皮羊肉塊", origin: "台灣（溫體）", price: 450, unit: "每半台斤（300 公克）", weightKg: 0.3, ref: "店家價目表" },
     { meat: "羊肉", store: "quanyang", name: "羊肉火鍋肉片", origin: "台灣（溫體）", price: 500, unit: "每半台斤（300 公克）", weightKg: 0.3, ref: "店家價目表" },
     { meat: "羊肉", store: "quanyang", name: "戰斧羊小排（需預訂 2～3 週）", origin: "台灣（溫體）", price: 1400, unit: "每台斤（600 公克）", weightKg: 0.6, ref: "店家價目表" },

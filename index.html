@@ -17,12 +17,20 @@
   <main>
     <div class="message message-warn" role="note">
       <strong>使用前請注意：</strong>
-      價格是網路上找到的參考價，不是即時報價；Google 評分尚未逐一查證（是否達 4 顆星以上請到 Google 地圖確認）。下單前請先向店家確認價格與營業狀況。
+      價格是網路上找到的參考價，不是即時報價；Google 評分尚未逐一查證（是否達 4 顆星以上請到 Google 地圖確認）。下單前請先向店家確認價格與營業狀況。查到可能已歇業的店家不列入。
       <span class="hint-inline">資料整理日期：<span id="updated"></span></span>
     </div>
 
     <section class="card" aria-labelledby="items-title">
       <h2 id="items-title">品項與每公斤價格</h2>
+      <div class="field">
+        <label for="filter-keyword">搜尋品項</label>
+        <input id="filter-keyword" type="search" placeholder="例如：肋條、羊排、牛腱" autocomplete="off">
+        <div class="quick-tags" aria-label="常用搜尋">
+          <button type="button" class="secondary chip" data-keyword="肋條">牛肋條</button>
+          <button type="button" class="secondary chip" data-keyword="">清除搜尋</button>
+        </div>
+      </div>
       <div class="field-row filters">
         <div class="field">
           <label for="filter-meat">肉類</label>
@@ -59,7 +67,7 @@
       <ul id="store-list" class="store-list"></ul>
     </section>
 
-    <p class="hint footer-note">完整資料與來源連結：<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%89%9B%E8%82%89%E9%8A%B7%E5%94%AE%E6%93%9A%E9%BB%9E.md">台中市牛肉銷售據點.md</a>、<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%BE%8A%E8%82%89%E9%8A%B7%E5%94%AE%E6%93%9A%E9%BB%9E.md">台中市羊肉銷售據點.md</a></p>
+    <p class="hint footer-note">完整資料與來源連結（另有<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%89%9B%E8%82%8B%E6%A2%9D%E5%83%B9%E6%A0%BC.md">台中市牛肋條價格.md</a>）：<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%89%9B%E8%82%89%E9%8A%B7%E5%94%AE%E6%93%9A%E9%BB%9E.md">台中市牛肉銷售據點.md</a>、<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%BE%8A%E8%82%89%E9%8A%B7%E5%94%AE%E6%93%9A%E9%BB%9E.md">台中市羊肉銷售據點.md</a></p>
   </main>
 
   <script src="meat-data.js"></script>
