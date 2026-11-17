@@ -38,6 +38,9 @@
 
 * { box-sizing: border-box; }
 
+/* hidden 屬性一律生效（否則會被 display: flex 等規則蓋掉） */
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   background: var(--bg);
@@ -181,100 +184,16 @@ button:disabled { opacity: 0.6; cursor: not-allowed; }
 
 /* ---------- 頁面導覽 ---------- */
 .top-nav { margin-bottom: 8px; font-size: 0.9rem; }
-.top-nav a, .footer-note a, .store-dl a, .item-meta a { color: var(--primary); }
+.top-nav a { color: var(--primary); }
 
-/* ---------- 牛肉價格比較頁 ---------- */
 .message-warn {
   background: var(--badge-bg);
   color: var(--text);
   border-left: 4px solid var(--mid);
   margin: 0 0 16px;
 }
-.hint-inline { display: block; margin-top: 4px; color: var(--muted); font-size: 0.875rem; }
 
-.filters { flex-wrap: wrap; }
-.filters .field { min-width: 140px; }
-
-.item-list, .store-list { list-style: none; margin: 8px 0 0; padding: 0; }
-
-.price-item, .store-item { border-top: 1px solid var(--border); padding: 12px 0; }
-.price-item:first-child, .store-item:first-child { border-top: none; }
-
-.price-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-.price-name { font-weight: 600; overflow-wrap: anywhere; }
-.price-kg { white-space: nowrap; color: var(--primary); }
-.price-kg strong { font-size: 1.15rem; }
-.price-kg .per { font-size: 0.8rem; color: var(--muted); }
-
-.store-item h3 { margin: 0 0 6px; font-size: 1.05rem; }
-.store-dl {
-  display: grid;
-  grid-template-columns: 6.5em 1fr;
-  gap: 4px 8px;
-  margin: 0;
-}
-.store-dl dt { color: var(--muted); }
-.store-dl dd { margin: 0; overflow-wrap: anywhere; }
-
-.footer-note { text-align: center; }
-
-@media (max-width: 420px) {
-  .price-head { flex-direction: column; gap: 2px; }
-  .store-dl { grid-template-columns: 1fr; }
-  .store-dl dt { margin-top: 4px; }
-}
-
-.quick-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-.chip { min-height: 36px; padding: 4px 12px; border-radius: 999px; font-size: 0.9rem; }
-
-/* ---------- 訂購登記表 ---------- */
 .form-section { margin: 20px 0 12px; font-size: 1.1rem; }
-.estimate { margin: 0 0 8px; font-size: 1.05rem; }
-.estimate strong { color: var(--primary); font-size: 1.3rem; }
-.radio-group { border: none; padding: 0; margin: 0 0 14px; }
-.radio-group legend { font-weight: 600; margin-bottom: 4px; padding: 0; }
-.radio { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-right: 16px; font-weight: 400; }
-.radio input { width: 20px; height: 20px; min-height: 0; }
-.order-link {
-  display: inline-block;
-  margin-top: 6px;
-  padding: 8px 14px;
-  border-radius: 8px;
-  background: var(--primary);
-  color: var(--primary-text);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-/* ---------- 地瓜酥登記表 ---------- */
-.snack-list { list-style: none; margin: 0 0 12px; padding: 0; }
-.snack-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 0;
-  border-top: 1px solid var(--border);
-}
-.snack-item:first-child { border-top: none; }
-.snack-info { display: flex; flex-direction: column; min-width: 0; }
-.snack-name { margin: 0; overflow-wrap: anywhere; }
-.snack-info .hint { margin: 0; }
-.stepper { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-.step-btn { width: 44px; padding: 0; font-size: 1.2rem; }
-.stepper .qty { width: 56px; text-align: center; padding: 8px 4px; }
-.summary { border-top: 2px solid var(--border); padding-top: 10px; }
-.summary p { margin: 0 0 4px; }
-
-/* ---------- 錦記地瓜酥訂購登記 ---------- */
-.stepper-wide .step-btn { width: 52px; }
-.stepper-wide input { width: 100px; text-align: center; }
 
 /* ---------- PWA 離線提示 ---------- */
 .offline-banner {
