@@ -42,7 +42,6 @@
   const submitBtn = $("submit-btn");
   const formMessage = $("form-message");
   const configWarning = $("config-warning");
-  const siteSel = $("site");
   const floorSel = $("floor");
   const areaSel = $("area");
   const subField = $("subcategory-field");
@@ -86,31 +85,14 @@
     return input ? input.value : "";
   }
 
-  // ---------- 選項：辦公地點 → 樓層 → 區域 ----------
-  const sites = (Array.isArray(cfg.REPAIR_SITES) ? cfg.REPAIR_SITES : [])
-    .filter((s) => s && s.name && Array.isArray(s.floors) && s.floors.length);
+  // ---------- 選項：部門、樓層、區域 ----------
+  const departments = Array.isArray(cfg.REPAIR_DEPARTMENTS) ? cfg.REPAIR_DEPARTMENTS : [];
+  const floors = Array.isArray(cfg.REPAIR_FLOORS) ? cfg.REPAIR_FLOORS : [];
   const areas = Array.isArray(cfg.REPAIR_AREAS) ? cfg.REPAIR_AREAS : [];
 
-  const departments = Array.isArray(cfg.REPAIR_DEPARTMENTS) ? cfg.REPAIR_DEPARTMENTS : [];
-
   departments.forEach((d) => $("department").append(option(d)));
-  sites.forEach((s) => siteSel.append(option(s.name)));
+  floors.forEach((f) => floorSel.append(option(f)));
   areas.forEach((a) => areaSel.append(option(a)));
-
-  function fillFloors() {
-    const site = sites.find((s) => s.name === siteSel.value);
-    floorSel.replaceChildren(option("", site ? "請選擇樓層" : "請先選辦公地點", true));
-    if (site) site.floors.forEach((f) => floorSel.append(option(f)));
-    floorSel.disabled = !site;
-    // 只有一個樓層就直接選好
-    if (site && site.floors.length === 1) floorSel.value = site.floors[0];
-  }
-  siteSel.addEventListener("change", fillFloors);
-  // 只有一個辦公地點就直接選好
-  if (sites.length === 1) {
-    siteSel.value = sites[0].name;
-    fillFloors();
-  }
 
   // ---------- 選項：報修類別、現象、影響情況 ----------
   function choice(name, value, desc) {
@@ -127,7 +109,7 @@
   }
 
   CATEGORIES.forEach((c) => $("category-choices").append(choice("category", c.name)));
-  IMPACTS.forEach((i) => $("impact-choices").append(choice("impact", i.name, i.desc)));
+  IMPACTS.forEach((i) => $("impact").append(option(i.name, i.name + "（" + i.desc + "）")));
 
   function fillSubcategories() {
     const cat = CATEGORIES.find((c) => c.name === checkedValue("category"));
@@ -322,14 +304,13 @@
       reporter_name: text("reporter_name"),
       department: $("department").value,
       contact: text("contact"),
-      site: siteSel.value,
       floor: floorSel.value,
       area: areaSel.value,
       seat_or_asset: text("seat_or_asset") || null,
       category: checkedValue("category"),
       subcategory: subField.hidden ? null : subSel.value || null,
       description: text("description"),
-      impact: checkedValue("impact"),
+      impact: $("impact").value,
       availability_type: specified ? "指定時段" : "隨時",
       available_date: specified ? availDate.value || null : null,
       available_slot: specified ? $("available_slot").value : null,
@@ -345,13 +326,12 @@
     need($("reporter_name"), row.reporter_name, "請填寫姓名。");
     need($("department"), row.department, "請選擇部門。");
     need($("contact"), row.contact.length >= 2, "請填寫分機或手機。");
-    need(siteSel, row.site, "請選擇辦公地點。");
     need(floorSel, row.floor, "請選擇樓層。");
     need(areaSel, row.area, "請選擇區域。");
     need($("category-group"), row.category, "請選擇報修類別。");
     if (!subField.hidden) need(subSel, row.subcategory, "請選擇最接近的現象；不確定就選「" + OTHER_SUB + "」。");
     need(descInput, row.description, "請描述發生的情況。");
-    need($("impact-group"), row.impact, "請選擇影響情況。");
+    need($("impact"), row.impact, "請選擇影響情況。");
     if (row.availability_type === "指定時段") {
       need(availDate, row.available_date, "請選擇日期。");
       if (row.available_date) need(availDate, row.available_date >= availDate.min, "日期不能早於今天。");
@@ -371,8 +351,8 @@
     problem = "尚未設定 Supabase 連線：請在 config.js 填入專案網址與 publishable key。";
   } else if (/^sb_secret_/.test(key) || /service_role/.test(key)) {
     problem = "config.js 裡放的是 secret 金鑰，這不能公開！請立即在 Supabase 後台撤銷它，改用 publishable key。";
-  } else if (!departments.length || !sites.length || !areas.length) {
-    problem = "尚未設定表單選項：請在 config.js 填寫 REPAIR_DEPARTMENTS、REPAIR_SITES 與 REPAIR_AREAS。";
+  } else if (!departments.length || !floors.length || !areas.length) {
+    problem = "尚未設定表單選項：請在 config.js 填寫 REPAIR_DEPARTMENTS、REPAIR_FLOORS 與 REPAIR_AREAS。";
   }
 
   loadRemembered();
@@ -429,7 +409,7 @@
     li.append(el("p", "item-desc", r.description || ""));
 
     // 升級前的舊資料只有 location
-    const place = r.site ? [r.site, r.floor, r.area].filter(Boolean).join(" ") : r.location || "";
+    const place = r.floor ? [r.site, r.floor, r.area].filter(Boolean).join(" ") : r.location || "";
     li.append(el("p", "item-meta", [r.case_no, place, formatTime(r.created_at) + " 報修"].filter(Boolean).join("・")));
 
     const progress = [];
@@ -520,8 +500,6 @@
       form.reset();
       clearPhotos();
       loadRemembered();
-      if (sites.length === 1) siteSel.value = sites[0].name;
-      fillFloors();
       fillSubcategories();
       updateAvailability();
       updateCount();
