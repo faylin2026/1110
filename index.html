@@ -17,7 +17,7 @@
   <header class="site-header">
     <nav class="top-nav"><a href="#list-title">查看報修進度 ↓</a></nav>
     <h1>辦公室水電報修</h1>
-    <p class="subtitle">電力、照明、給水、排水、衛浴有狀況，填這張表通知總務。只要描述看到的現象，不必判斷故障原因。</p>
+    <p class="subtitle">電力、照明、給水、排水、廁所有狀況，填這張表通知總務。只要描述看到的現象，不必判斷故障原因。</p>
   </header>
 
   <main>
@@ -37,12 +37,14 @@
           </div>
           <div class="field">
             <label for="department">部門 <span class="req" aria-hidden="true">*</span></label>
-            <input id="department" name="department" type="text" maxlength="50" autocomplete="organization-title" placeholder="例如：業務部" required>
+            <select id="department" name="department" required>
+              <option value="" selected disabled>請選擇部門</option>
+            </select>
           </div>
         </div>
         <div class="field">
           <label for="contact">聯絡方式 <span class="req" aria-hidden="true">*</span></label>
-          <input id="contact" name="contact" type="text" maxlength="100" autocomplete="off" placeholder="分機、手機或公司 Email" aria-describedby="contact-hint" required>
+          <input id="contact" name="contact" type="text" inputmode="tel" maxlength="100" autocomplete="off" placeholder="分機或手機，例如：分機 123、0912-345-678" aria-describedby="contact-hint" required>
           <p id="contact-hint" class="hint">維修人員到場前會用這個方式聯絡你。</p>
         </div>
         <label class="check">

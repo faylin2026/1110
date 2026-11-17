@@ -75,7 +75,7 @@ alter table public.repair_requests
 comment on table  public.repair_requests                 is '辦公室水電報修：同仁送出的報修單與維修處理紀錄';
 comment on column public.repair_requests.case_no         is '案件編號，自動產生，例如 WR-20261117-0001';
 comment on column public.repair_requests.legacy          is '升級前的舊資料為 true，不檢查新版必填欄位';
-comment on column public.repair_requests.contact         is '聯絡方式：分機、手機或公司 Email';
+comment on column public.repair_requests.contact         is '聯絡方式：分機或手機';
 comment on column public.repair_requests.site            is '故障位置：辦公地點';
 comment on column public.repair_requests.seat_or_asset   is '座位或設備編號（選填）';
 comment on column public.repair_requests.photo_paths     is '現場照片在 repair-photos 儲存空間裡的路徑';
@@ -142,7 +142,7 @@ alter table public.repair_requests
   add constraint repair_requests_required_fields check (
     legacy or (
           char_length(btrim(coalesce(department, ''))) >= 1
-      and char_length(btrim(coalesce(contact, '')))    >= 3
+      and char_length(btrim(coalesce(contact, '')))    >= 2
       and char_length(btrim(coalesce(site, '')))       >= 1
       and char_length(btrim(coalesce(floor, '')))      >= 1
       and char_length(btrim(coalesce(area, '')))       >= 1
@@ -164,7 +164,7 @@ alter table public.repair_requests
 
   -- 報修類別（後三個是舊版類別，只為了保留舊資料）
   add constraint repair_requests_category_check
-    check (category in ('電力', '照明', '給水', '排水', '衛浴', '其他', '設備', '網路', '環境')),
+    check (category in ('電力', '照明', '給水', '排水', '廁所', '其他', '設備', '網路', '環境')),
 
   add constraint repair_requests_impact_check
     check (impact is null
