@@ -1,7 +1,7 @@
 {
-  "name": "訂購價格比較",
-  "short_name": "訂購比價",
-  "description": "台中牛肉、羊肉與錦記地瓜酥的價格比較與訂購登記",
+  "name": "辦公室水電報修",
+  "short_name": "水電報修",
+  "description": "辦公室水電報修表單，另有訂購價格比較與訂購登記",
   "lang": "zh-Hant-TW",
   "start_url": "./index.html",
   "scope": "./",
@@ -14,6 +14,7 @@
     { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ],
   "shortcuts": [
+    { "name": "訂購價格比較", "url": "./meat.html", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "地瓜酥訂購", "url": "./jinji.html", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] },
     { "name": "訂購登記表", "url": "./order.html", "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }] }
   ]

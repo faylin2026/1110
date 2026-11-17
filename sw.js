@@ -1,16 +1,18 @@
-// Service Worker：讓網站可安裝成 App，並在離線時仍能瀏覽價格與表單頁面
+// Service Worker：讓網站可安裝成 App，並在離線時仍能開啟報修表單與價格頁面
 // 策略：
 //   - 本站檔案（同網域 GET）：先連網取得最新版本並更新快取，離線時改用快取（network-first）。
 //   - supabase-js（CDN）：先用快取，背景更新（stale-while-revalidate）。
-//   - Supabase API 與其他請求：一律不經過快取，訂單一定要連網才能送出。
+//   - Supabase API 與其他請求：一律不經過快取，報修與訂單一定要連網才能送出。
 // 修改要預先快取的檔案清單時，請把 CACHE_VERSION 加 1。
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const CACHE = "order-site-" + CACHE_VERSION;
 const CDN_HOST = "cdn.jsdelivr.net";
 
 const PRECACHE = [
   "./",
   "./index.html",
+  "./app.js",
+  "./meat.html",
   "./order.html",
   "./snack.html",
   "./jinji.html",

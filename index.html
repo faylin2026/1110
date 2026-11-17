@@ -4,82 +4,160 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>訂購價格比較</title>
+  <title>辦公室水電報修</title>
   <meta name="theme-color" content="#2357c6">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="訂購比價">
+  <meta name="apple-mobile-web-app-title" content="水電報修">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
-    <nav class="top-nav"><a href="order.html">訂購登記表 →</a>　<a href="snack.html">地瓜酥登記表 →</a>　<a href="jinji.html">地瓜酥訂購 →</a></nav>
-    <h1>訂購價格比較</h1>
-    <p class="subtitle">台中市牛肉、羊肉肉舖，以及高雄旗津錦記地瓜酥的品項與每公斤價格。按「訂購這個品項」填寫訂購登記表，或直接打電話給店家。</p>
+    <nav class="top-nav"><a href="#list-title">查看報修進度 ↓</a>　<a href="meat.html">訂購價格比較 →</a></nav>
+    <h1>辦公室水電報修</h1>
+    <p class="subtitle">電力、照明、給水、排水、衛浴有狀況，填這張表通知總務。只要描述看到的現象，不必判斷故障原因。</p>
   </header>
 
   <main>
-    <div class="message message-warn" role="note">
-      <strong>使用前請注意：</strong>
-      價格是網路上找到的參考價，不是即時報價；Google 評分尚未逐一查證（是否達 4 顆星以上請到 Google 地圖確認）。下單前請先向店家確認價格與營業狀況。查到可能已歇業的店家不列入。
-      <span class="hint-inline">資料整理日期：<span id="updated"></span></span>
-    </div>
+    <div id="config-warning" class="message message-error" role="alert" hidden></div>
 
-    <section class="card" aria-labelledby="items-title">
-      <h2 id="items-title">品項與每公斤價格</h2>
-      <div class="field">
-        <label for="filter-keyword">搜尋品項</label>
-        <input id="filter-keyword" type="search" placeholder="例如：肋條、羊排、地瓜酥" autocomplete="off">
-        <div class="quick-tags" aria-label="常用搜尋">
-          <button type="button" class="secondary chip" data-keyword="肋條">牛肋條</button>
-          <button type="button" class="secondary chip" data-keyword="酥">地瓜酥</button>
-          <button type="button" class="secondary chip" data-keyword="">清除搜尋</button>
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">填寫報修單</h2>
+      <p class="hint form-lead"><span class="req" aria-hidden="true">*</span> 為必填。</p>
+
+      <form id="repair-form" novalidate>
+        <!-- ===== 報修人 ===== -->
+        <h3 class="form-section">報修人</h3>
+        <div class="field-row">
+          <div class="field">
+            <label for="reporter_name">姓名 <span class="req" aria-hidden="true">*</span></label>
+            <input id="reporter_name" name="reporter_name" type="text" maxlength="50" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="department">部門 <span class="req" aria-hidden="true">*</span></label>
+            <input id="department" name="department" type="text" maxlength="50" autocomplete="organization-title" placeholder="例如：業務部" required>
+          </div>
         </div>
-      </div>
-      <div class="field-row filters">
         <div class="field">
-          <label for="filter-meat">類別</label>
-          <select id="filter-meat">
-            <option value="">全部類別</option>
-            <option value="牛肉">牛肉</option>
-            <option value="羊肉">羊肉</option>
-            <option value="地瓜酥">地瓜酥</option>
+          <label for="contact">聯絡方式 <span class="req" aria-hidden="true">*</span></label>
+          <input id="contact" name="contact" type="text" maxlength="100" autocomplete="off" placeholder="分機、手機或公司 Email" aria-describedby="contact-hint" required>
+          <p id="contact-hint" class="hint">維修人員到場前會用這個方式聯絡你。</p>
+        </div>
+        <label class="check">
+          <input id="remember" type="checkbox" checked>
+          <span>在這台裝置記住我的姓名、部門與聯絡方式，下次自動帶入</span>
+        </label>
+
+        <!-- ===== 故障位置 ===== -->
+        <h3 class="form-section">故障位置</h3>
+        <div class="field">
+          <label for="site">辦公地點 <span class="req" aria-hidden="true">*</span></label>
+          <select id="site" name="site" required>
+            <option value="" selected disabled>請選擇辦公地點</option>
           </select>
         </div>
-        <div class="field">
-          <label for="filter-store">店家</label>
-          <select id="filter-store"><option value="">全部店家</option></select>
+        <div class="field-row">
+          <div class="field">
+            <label for="floor">樓層 <span class="req" aria-hidden="true">*</span></label>
+            <select id="floor" name="floor" required disabled>
+              <option value="" selected disabled>請先選辦公地點</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="area">區域 <span class="req" aria-hidden="true">*</span></label>
+            <select id="area" name="area" required>
+              <option value="" selected disabled>請選擇區域</option>
+            </select>
+          </div>
         </div>
         <div class="field">
-          <label for="filter-origin">來源</label>
-          <select id="filter-origin"><option value="">全部來源</option></select>
+          <label for="seat_or_asset">座位或設備編號</label>
+          <input id="seat_or_asset" name="seat_or_asset" type="text" maxlength="100" autocomplete="off" placeholder="例如：靠窗第 3 排、A-12 座位、飲水機 W-03">
+          <p class="hint">選填。寫得越清楚，維修人員越快找到位置。</p>
         </div>
+
+        <!-- ===== 問題 ===== -->
+        <h3 class="form-section">發生什麼問題</h3>
+        <fieldset class="choice-group" id="category-group">
+          <legend>報修類別 <span class="req" aria-hidden="true">*</span></legend>
+          <div class="choices choices-grid" id="category-choices"></div>
+        </fieldset>
+
+        <div class="field" id="subcategory-field" hidden>
+          <label for="subcategory">看到的現象 <span class="req" aria-hidden="true">*</span></label>
+          <select id="subcategory" name="subcategory"></select>
+        </div>
+
         <div class="field">
-          <label for="sort">排序</label>
-          <select id="sort">
-            <option value="asc" selected>每公斤價格：低 → 高</option>
-            <option value="desc">每公斤價格：高 → 低</option>
-            <option value="store">依店家</option>
-          </select>
+          <label for="description">問題描述 <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="description" name="description" rows="4" maxlength="1000" aria-describedby="description-hint" placeholder="發生什麼情況？何時開始？是否持續發生？" required></textarea>
+          <p id="description-hint" class="hint">描述看見的現象即可，不必判斷原因。例如：「今天早上開始，茶水間水龍頭關不緊，一直滴水。」<span id="description-count" class="count"></span></p>
         </div>
+
+        <fieldset class="choice-group" id="impact-group">
+          <legend>影響情況 <span class="req" aria-hidden="true">*</span></legend>
+          <div class="choices" id="impact-choices"></div>
+        </fieldset>
+        <div id="safety-note" class="message message-warn" role="note" hidden>
+          <strong>有立即危險時請不要等：</strong>冒煙、焦味、漏電、大量漏水時，先遠離現場並提醒周圍同仁，直接打電話通知總務或大樓管理室，再補填這張表。
+        </div>
+
+        <!-- ===== 照片 ===== -->
+        <h3 class="form-section">現場照片 <span class="optional">選填</span></h3>
+        <div class="field">
+          <label for="photos" class="file-button">＋ 拍照或選擇照片</label>
+          <input id="photos" type="file" accept="image/*" multiple class="visually-hidden" aria-describedby="photos-hint">
+          <p id="photos-hint" class="hint">最多 5 張。請拍到故障處，再拍一張周邊位置，方便維修人員找到。</p>
+          <ul id="photo-list" class="photo-list" aria-label="已選的照片"></ul>
+        </div>
+
+        <!-- ===== 可配合時段 ===== -->
+        <h3 class="form-section">可配合維修時段 <span class="optional">選填</span></h3>
+        <fieldset class="choice-group">
+          <legend class="visually-hidden">可配合維修時段</legend>
+          <div class="choices choices-row">
+            <label class="choice"><input type="radio" name="availability_type" value="隨時" checked><span>隨時都可以</span></label>
+            <label class="choice"><input type="radio" name="availability_type" value="指定時段"><span>指定日期與時段</span></label>
+          </div>
+        </fieldset>
+        <div class="field-row" id="availability-detail" hidden>
+          <div class="field">
+            <label for="available_date">日期 <span class="req" aria-hidden="true">*</span></label>
+            <input id="available_date" name="available_date" type="date">
+          </div>
+          <div class="field">
+            <label for="available_slot">時段</label>
+            <select id="available_slot" name="available_slot">
+              <option value="整天皆可">整天皆可</option>
+              <option value="上午（9–12 點）">上午（9–12 點）</option>
+              <option value="下午（13–18 點）">下午（13–18 點）</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="submit-btn" type="submit">送出報修</button>
+        <div id="form-message" class="message" role="status" aria-live="polite" tabindex="-1" hidden></div>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="list-title">
+      <div class="list-head">
+        <h2 id="list-title">最近 20 筆報修</h2>
+        <button id="reload-btn" type="button" class="secondary">重新整理</button>
       </div>
-      <p id="items-status" class="hint" role="status" aria-live="polite"></p>
-      <ul id="item-list" class="item-list"></ul>
-      <p class="hint">每公斤價格 = 售價 ÷ 重量（公斤），四捨五入到整數元；1 台斤 = 0.6 公斤。售價有兩個數字時，表示店家不同頁面標示的價格不一致。</p>
+      <p class="hint">新的在上面。為保護個資，清單不顯示報修人姓名與聯絡方式。</p>
+      <p id="list-status" class="hint" role="status" aria-live="polite"></p>
+      <ul id="repair-list" class="repair-list"></ul>
     </section>
-
-    <section class="card" aria-labelledby="stores-title">
-      <h2 id="stores-title">店家資料</h2>
-      <ul id="store-list" class="store-list"></ul>
-    </section>
-
-    <p class="hint footer-note">完整資料與來源連結（另有<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E9%8C%A6%E8%A8%98%E5%9C%B0%E7%93%9C%E9%85%A5%E5%83%B9%E6%A0%BC.md">錦記地瓜酥價格.md</a>、<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%89%9B%E8%82%8B%E6%A2%9D%E5%83%B9%E6%A0%BC.md">台中市牛肋條價格.md</a>）：<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%89%9B%E8%82%89%E9%8A%B7%E5%94%AE%E6%93%9A%E9%BB%9E.md">台中市牛肉銷售據點.md</a>、<a href="https://github.com/faylin2026/1110/blob/main/%E6%96%87%E4%BB%B6/%E5%8F%B0%E4%B8%AD%E5%B8%82%E7%BE%8A%E8%82%89%E9%8A%B7%E5%94%AE%E6%93%9A%E9%BB%9E.md">台中市羊肉銷售據點.md</a></p>
   </main>
 
-  <script src="meat-data.js"></script>
-  <script src="meat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"
+          integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK"
+          crossorigin="anonymous"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
   <script src="pwa.js"></script>
 </body>
 </html>
