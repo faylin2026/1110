@@ -34,8 +34,6 @@
 
 `supabase/schema.sql` 是第一版的 `repair_requests` 建表 SQL，已由 `supabase/repair_requests_v2.sql` 取代。
 
-`supabase/orders.sql`、`supabase/jinji_orders.sql` 是先前訂購登記頁用的資料表，網頁已移除、不再使用；Supabase 上的資料表與訂單資料仍在，不需要時請到後台自行刪除。
-
 ### 預覽與發佈
 
 - 本機預覽：在儲存庫根目錄執行 `python3 -m http.server 8000`，再開啟 http://localhost:8000/ 。
