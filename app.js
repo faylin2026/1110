@@ -25,7 +25,7 @@
     { name: "照明", subs: ["燈具不亮", "燈光閃爍"] },
     { name: "給水", subs: ["漏水", "水龍頭故障", "無水"] },
     { name: "排水", subs: ["排水堵塞", "漏水"] },
-    { name: "衛浴", subs: ["馬桶堵塞", "沖水異常", "設備破損"] },
+    { name: "廁所", subs: ["馬桶堵塞", "沖水異常", "設備破損"] },
     { name: "其他", subs: [] },
   ];
 
@@ -91,6 +91,9 @@
     .filter((s) => s && s.name && Array.isArray(s.floors) && s.floors.length);
   const areas = Array.isArray(cfg.REPAIR_AREAS) ? cfg.REPAIR_AREAS : [];
 
+  const departments = Array.isArray(cfg.REPAIR_DEPARTMENTS) ? cfg.REPAIR_DEPARTMENTS : [];
+
+  departments.forEach((d) => $("department").append(option(d)));
   sites.forEach((s) => siteSel.append(option(s.name)));
   areas.forEach((a) => areaSel.append(option(a)));
 
@@ -317,7 +320,7 @@
     const specified = checkedValue("availability_type") === "指定時段";
     return {
       reporter_name: text("reporter_name"),
-      department: text("department"),
+      department: $("department").value,
       contact: text("contact"),
       site: siteSel.value,
       floor: floorSel.value,
@@ -340,8 +343,8 @@
     const need = (anchor, ok, text) => { if (!ok) errors.push([anchor, text]); };
 
     need($("reporter_name"), row.reporter_name, "請填寫姓名。");
-    need($("department"), row.department, "請填寫部門。");
-    need($("contact"), row.contact.length >= 3, "請填寫分機、手機或公司 Email。");
+    need($("department"), row.department, "請選擇部門。");
+    need($("contact"), row.contact.length >= 2, "請填寫分機或手機。");
     need(siteSel, row.site, "請選擇辦公地點。");
     need(floorSel, row.floor, "請選擇樓層。");
     need(areaSel, row.area, "請選擇區域。");
@@ -368,8 +371,8 @@
     problem = "尚未設定 Supabase 連線：請在 config.js 填入專案網址與 publishable key。";
   } else if (/^sb_secret_/.test(key) || /service_role/.test(key)) {
     problem = "config.js 裡放的是 secret 金鑰，這不能公開！請立即在 Supabase 後台撤銷它，改用 publishable key。";
-  } else if (!sites.length || !areas.length) {
-    problem = "尚未設定故障位置選項：請在 config.js 填寫 REPAIR_SITES 與 REPAIR_AREAS。";
+  } else if (!departments.length || !sites.length || !areas.length) {
+    problem = "尚未設定表單選項：請在 config.js 填寫 REPAIR_DEPARTMENTS、REPAIR_SITES 與 REPAIR_AREAS。";
   }
 
   loadRemembered();

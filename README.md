@@ -13,7 +13,7 @@
 ### 水電報修的設定步驟
 
 1. 在 Supabase 的 SQL Editor 執行 `supabase/repair_requests_v2.sql`（全新專案或已執行過舊版 `supabase/schema.sql` 都適用，舊資料會保留；可重複執行）。它會升級 `repair_requests` 資料表、設定權限，並建立不公開的照片儲存空間 `repair-photos`。
-2. 在 `config.js` 的 `REPAIR_SITES`、`REPAIR_AREAS` 改成公司實際的辦公地點、樓層與區域（目前是範例）。
+2. `config.js` 的 `REPAIR_DEPARTMENTS` 是部門選項；`REPAIR_SITES`、`REPAIR_AREAS` 請改成公司實際的辦公地點、樓層與區域（目前是範例）。
 3. 管理端欄位由總務或維修人員在 Supabase 後台 Table Editor → `repair_requests` 填寫：
 
    | 欄位 | 用途 |

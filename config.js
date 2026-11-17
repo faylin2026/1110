@@ -9,7 +9,11 @@ window.APP_CONFIG = {
   SUPABASE_URL: "https://nkfyhiebwbgizscthskv.supabase.co",
   SUPABASE_PUBLISHABLE_KEY: "sb_publishable_QSSA9c6pstsgi9DyGV29oQ_GhLHazlM",
 
-  // ---------- 水電報修表單（index.html）的故障位置選項 ----------
+  // ---------- 水電報修表單（index.html）的選項 ----------
+  // 報修人的所屬部門
+  REPAIR_DEPARTMENTS: ["管理部", "外銷部", "董事長室", "總經理室", "設計部", "業務部"],
+
+  // 故障位置
   // 下面是範例，請改成公司實際的辦公地點與樓層；改完存檔即可，不必動其他檔案。
   // 表單會依「辦公地點 → 樓層 → 區域」的順序讓報修人選擇。
   REPAIR_SITES: [
