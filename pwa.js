@@ -21,7 +21,7 @@
       bar.id = "offline-banner";
       bar.className = "offline-banner";
       bar.setAttribute("role", "status");
-      bar.textContent = "目前離線：可以瀏覽價格，但訂購表單要連上網路才能送出。";
+      bar.textContent = "目前離線：可以瀏覽頁面，但表單要連上網路才能送出。";
       document.body.prepend(bar);
     }
     bar.hidden = false;
