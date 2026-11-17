@@ -4,7 +4,7 @@
 //   - supabase-js（CDN）：先用快取，背景更新（stale-while-revalidate）。
 //   - Supabase API 與其他請求：一律不經過快取，報修一定要連網才能送出。
 // 修改要預先快取的檔案清單時，請把 CACHE_VERSION 加 1。
-const CACHE_VERSION = "v4";
+const CACHE_VERSION = "v5";
 const CACHE = "order-site-" + CACHE_VERSION;
 const CDN_HOST = "cdn.jsdelivr.net";
 
