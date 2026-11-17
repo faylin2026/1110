@@ -54,17 +54,11 @@
 
         <!-- ===== 故障位置 ===== -->
         <h3 class="form-section">故障位置</h3>
-        <div class="field">
-          <label for="site">辦公地點 <span class="req" aria-hidden="true">*</span></label>
-          <select id="site" name="site" required>
-            <option value="" selected disabled>請選擇辦公地點</option>
-          </select>
-        </div>
         <div class="field-row">
           <div class="field">
             <label for="floor">樓層 <span class="req" aria-hidden="true">*</span></label>
-            <select id="floor" name="floor" required disabled>
-              <option value="" selected disabled>請先選辦公地點</option>
+            <select id="floor" name="floor" required>
+              <option value="" selected disabled>請選擇樓層</option>
             </select>
           </div>
           <div class="field">
@@ -98,10 +92,12 @@
           <p id="description-hint" class="hint">描述看見的現象即可，不必判斷原因。例如：「今天早上開始，茶水間水龍頭關不緊，一直滴水。」<span id="description-count" class="count"></span></p>
         </div>
 
-        <fieldset class="choice-group" id="impact-group">
-          <legend>影響情況 <span class="req" aria-hidden="true">*</span></legend>
-          <div class="choices" id="impact-choices"></div>
-        </fieldset>
+        <div class="field">
+          <label for="impact">影響情況 <span class="req" aria-hidden="true">*</span></label>
+          <select id="impact" name="impact" required>
+            <option value="" selected disabled>請選擇影響情況</option>
+          </select>
+        </div>
         <div id="safety-note" class="message message-warn" role="note" hidden>
           <strong>有立即危險時請不要等：</strong>冒煙、焦味、漏電、大量漏水時，先遠離現場並提醒周圍同仁，直接打電話通知總務或大樓管理室，再補填這張表。
         </div>

@@ -78,7 +78,7 @@ comment on table  public.repair_requests                 is '辦公室水電報�
 comment on column public.repair_requests.case_no         is '案件編號，自動產生，例如 WR-20261117-0001';
 comment on column public.repair_requests.legacy          is '升級前的舊資料為 true，不檢查新版必填欄位';
 comment on column public.repair_requests.contact         is '聯絡方式：分機或手機';
-comment on column public.repair_requests.site            is '故障位置：辦公地點';
+comment on column public.repair_requests.site            is '舊版欄位（已停用）：辦公地點';
 comment on column public.repair_requests.seat_or_asset   is '座位或設備編號（選填）';
 comment on column public.repair_requests.photo_paths     is '現場照片在 repair-photos 儲存空間裡的路徑';
 comment on column public.repair_requests.priority        is '處理優先順序，由管理人員依安全風險及影響範圍判定';
@@ -145,7 +145,6 @@ alter table public.repair_requests
     legacy or (
           char_length(btrim(coalesce(department, ''))) >= 1
       and char_length(btrim(coalesce(contact, '')))    >= 2
-      and char_length(btrim(coalesce(site, '')))       >= 1
       and char_length(btrim(coalesce(floor, '')))      >= 1
       and char_length(btrim(coalesce(area, '')))       >= 1
       and impact is not null
